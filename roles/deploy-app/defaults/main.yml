@@ -1,0 +1,7 @@
+---
+# defaults file for roles/deploy-app
+app_name: webapp
+repo_git: https://github.com/diranetafen/static-website-example.git
+template_name: index.html.j2
+port: 8100
+

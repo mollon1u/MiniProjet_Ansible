@@ -1,0 +1,35 @@
+---
+- name: "Clean Folder"
+  file:
+    path: "/home/{{ ansible_user }}/{{ app_name }}"
+    state: absent
+- name: Create webapp directory
+  file:
+    path: "/home/{{ ansible_user }}/{{ app_name }}/"
+    state: directory
+- name: "Install git"
+  yum:
+    name: git
+    state: present
+    update_cache: yes
+- name: "git clone to nginx folder"
+  git:
+    repo: "{{ repo_git }}"
+    dest: "/home/{{ ansible_user }}/{{ app_name }}/"
+- name: Generate html
+  template:
+    src: templates/{{ template_name }}
+    dest: "/home/{{ ansible_user }}/{{ app_name }}/index.html"
+- name: "Launching an HTTPD Container"
+  docker_container:
+#     name: apache-server
+    name: nginx-server
+    image: nginx
+#        image: httpd
+    state: started
+    ports:
+      - "8100:80"
+    volumes:
+      - /home/{{ ansible_user }}/{{ app_name }}:/usr/share/nginx/html/
+#          - /home/{{ ansible_user }}/webapp:/usr/local/apache2/htdocs/
+...
