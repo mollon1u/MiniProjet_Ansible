@@ -5,4 +5,5 @@ ansible_ssh_extra_args: '-o StrictHostKeyChecking=no'
 ansible_sudo_pass: root
 port: "80"
 welcome: Bienvenue sur le serveur {{ ansible_hostname }}
+message: "{{ app_name }} déployée par l'équipe DevOps"
 ...
