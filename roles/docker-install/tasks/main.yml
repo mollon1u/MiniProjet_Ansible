@@ -37,4 +37,9 @@
     name: "{{ ansible_user }}"
     groups: dockerroot
     append: yes
+- name: "Install git"
+  yum:
+    name: git
+    state: present
+    update_cache: yes
 ...

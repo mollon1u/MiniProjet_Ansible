@@ -7,11 +7,6 @@
   file:
     path: "/home/{{ ansible_user }}/{{ app_name }}/"
     state: directory
-- name: "Install git"
-  yum:
-    name: git
-    state: present
-    update_cache: yes
 - name: "git clone to nginx folder"
   git:
     repo: "{{ repo_git }}"
